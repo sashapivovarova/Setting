@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let name: String = "sasha"
+    let province: String? = "Newyork"
+    let age: Int? = 20
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text(name)
+            Text(province ?? "Ohio")
+            Text(age?.description ?? "10")
+            
         }
-        .padding()
     }
 }
 

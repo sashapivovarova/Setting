@@ -11,18 +11,18 @@ struct ContentView: View {
     
     let name: String = "sasha"
     let province: String? = "Newyork"
-    let age: Int? = 20
+    let age: Int? = 10
     
     var body: some View {
         VStack {
             Text(name)
             Text(province ?? "Ohio")
-            Text(age?.description ?? "10")
-            
+            Text(age?.description ?? "100")
         }
     }
 }
-
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

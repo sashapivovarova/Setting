@@ -7,47 +7,29 @@
 
 import SwiftUI
 
-struct UserInfo {
-    let name: String
-    let age: Int?
-    
-    func sayMyName(with name: String) {
-        print(name)
-    }
-}
-
 struct ContentView: View {
-    let userInfo: UserInfo
     
-//    let name: String
-//    let age: Int?
+    var name: String? = "sasha"
+    var nickName: String?
+    var mail: String? = "abc@def.com"
     
     var body: some View {
-        VStack {
-//            Text(name)
-//            Text(age?.description ?? "100")
+        VStack{
+            Text(name!)
             
-            Text(userInfo.name)
-            Text(userInfo.age?.description ?? "100")
+            Text(nickName ?? "james")
             
-            Button {
-//                sayMyName(with: name)
-                userInfo.sayMyName(with: userInfo.name)
-            } label: {
-                Text("Button")
+            if let mail = mail {
+                Text(mail)
+            } else {
+                Text("Error")
             }
         }
     }
-    
-//    func sayMyName(with name: String) {
-//        print(name)
-//    }
 }
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-//        ContentView(name: "sasha", age: 200)
-        
-        let sasha = UserInfo(name: "sasha", age: 200)
-        ContentView(userInfo: sasha)
+        ContentView()
     }
 }

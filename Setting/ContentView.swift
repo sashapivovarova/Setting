@@ -9,15 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let name: String = "sasha"
-    let province: String? = "Newyork"
-    let age: Int? = 10
+    let myFirstClosure: () -> Void = { print("Closure") }
+    
+    func myFirstFunction() -> Void {
+        print("Function")
+    }
     
     var body: some View {
         VStack {
-            Text(name)
-            Text(province ?? "Ohio")
-            Text(age?.description ?? "100")
+            Button (action: myFirstClosure) {
+                Text("Clousure")
+            }
+            Button { myFirstFunction()}label: {
+                Text("Function")
+            }
         }
     }
 }

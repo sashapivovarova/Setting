@@ -7,27 +7,47 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct UserInfo {
+    let name: String
+    let age: Int?
     
-    let myFirstClosure: () -> Void = { print("Closure") }
-    
-    func myFirstFunction() -> Void {
-        print("Function")
+    func sayMyName(with name: String) {
+        print(name)
     }
+}
+
+struct ContentView: View {
+    let userInfo: UserInfo
+    
+//    let name: String
+//    let age: Int?
     
     var body: some View {
         VStack {
-            Button (action: myFirstClosure) {
-                Text("Clousure")
-            }
-            Button { myFirstFunction()}label: {
-                Text("Function")
+//            Text(name)
+//            Text(age?.description ?? "100")
+            
+            Text(userInfo.name)
+            Text(userInfo.age?.description ?? "100")
+            
+            Button {
+//                sayMyName(with: name)
+                userInfo.sayMyName(with: userInfo.name)
+            } label: {
+                Text("Button")
             }
         }
     }
+    
+//    func sayMyName(with name: String) {
+//        print(name)
+//    }
 }
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+//        ContentView(name: "sasha", age: 200)
+        
+        let sasha = UserInfo(name: "sasha", age: 200)
+        ContentView(userInfo: sasha)
     }
 }

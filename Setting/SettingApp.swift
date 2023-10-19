@@ -11,7 +11,7 @@ import SwiftUI
 struct SettingApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(userInfo: UserInfo(name: "sasha", age: 200))
         }
     }
 }

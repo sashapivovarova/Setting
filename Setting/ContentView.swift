@@ -7,27 +7,38 @@
 
 import SwiftUI
 
-struct Student {
-    let name: String
-    let pet: Pet?
-}
-
-struct Pet {
-    let name: String
-    let age: Int
-}
-
 struct ContentView: View {
-    let student = Student(name: "sasha", pet: Pet(name: "puppy", age: 2))
     
-   var body: some View {
-       VStack{
-           Text(student.name)
-//           Text(student.pet!.name)
-           if let petName = student.pet?.name {
-               Text(petName)
-           }
-       }
+    @State var won: Int = 1000
+    var yen: Int {
+        get {
+            return won/10
+        }
+    }
+    var body: some View {
+        VStack{
+            if won == 1000 {
+                Text("Reiwa")
+            } else {
+                Text("Syouwa")
+            }
+            Text("won is \(won.description)")
+            Text("yen is \(yen.description)")
+            
+            Button {
+                if won == 1000 {
+                    won = 200
+                } else {
+                    won = 1000
+                }
+            } label: {
+                if won == 1000 {
+                    Text("won become to 200")
+                } else {
+                    Text("won become to 1000")
+                }
+            }
+        }
     }
 }
 

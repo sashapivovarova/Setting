@@ -7,38 +7,40 @@
 
 import SwiftUI
 
-enum Drink {
-    case coffee(hasMilk: Bool)
-    case juice
-    case soft(color: Color)
-    
-    var name: String {
-        switch self {
-        case .coffee(hasMilk: let hasMilk):
-            if hasMilk {
-                return "latte"
-            } else {
-                return "americano"
-            }
-        case .juice:
-            return "juice"
-        case .soft(color: let color):
-            switch color {
-            case .orange: return "fanta"
-            case .black: return "coke"
-            default:
-                return "soft"
-            }
-        }
-    }
+struct Friend {
+    let name: String
+    let pet: Pet?
+}
+
+enum Pet {
+    case cat(String)
+    case dog(String)
 }
 
 struct ContentView: View {
-    let myDrinks: Drink = .soft(color: .black)
+    var sasha: Friend = Friend(name: "sasha", pet: Pet.cat("corgy"))
+    var nico: Friend = Friend(name: "nico", pet: Pet.dog("shiba"))
+    @State var pet: String = "Do you have a pet?"
     
     var body: some View {
         VStack{
-            Text(myDrinks.name)
+            Text(pet)
+            Button {
+                if let petName = nico.pet {
+                    pet = getPetName(petName)
+                } else {
+                    pet = "No, I don't have a pet."
+                }
+            } label: {
+                Text("Push")
+            }
+        }
+    }
+    
+    func getPetName(_ petName: Pet) -> String {
+        switch petName {
+        case .dog(let name): return name
+        case .cat(let name): return name
         }
     }
 }

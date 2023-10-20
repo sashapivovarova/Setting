@@ -8,20 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isShowingAlert: Bool = false
     
     var body: some View {
-        VStack{
-            Button {
-                isShowingAlert = true
-            }label: {
-                Text("Show me the alert")
-            }
-            .alert(isPresented: $isShowingAlert) {
-                Alert(title: Text("Something is wrong!"),
-                      primaryButton: .default(Text("OK")),
-                      secondaryButton: .cancel())
-            }
+        TabView(selection: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Selection@*/.constant(1)/*@END_MENU_TOKEN@*/) {
+            Text("Tab Content 1").tabItem { /*@START_MENU_TOKEN@*/Text("Tab Label 1");/*@END_MENU_TOKEN@*/ Image(systemName: "house.fill") }.tag(1)
+            Text("Tab Content 2").tabItem { /*@START_MENU_TOKEN@*/Text("Tab Label 2")/*@END_MENU_TOKEN@*/; Image(systemName: "bolt.fill") }.tag(2)
+            Text("Tab Content 3").tabItem { Text("Tab Label 3"); Image(systemName: "heart.fill") }.tag(3)
         }
     }
 }

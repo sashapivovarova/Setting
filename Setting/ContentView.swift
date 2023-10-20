@@ -7,23 +7,40 @@
 
 import SwiftUI
 
-func returnName() -> String {
-    return "sasha"
-} // function
+enum Drink {
+    case coffee(hasMilk: Bool)
+    case juice
+    case soft(color: Color)
+    
+    var name: String {
+        switch self {
+        case .coffee(hasMilk: let hasMilk):
+            if hasMilk {
+                return "latte"
+            } else {
+                return "americano"
+            }
+        case .juice:
+            return "juice"
+        case .soft(color: let color):
+            switch color {
+            case .orange: return "fanta"
+            case .black: return "coke"
+            default:
+                return "soft"
+            }
+        }
+    }
+}
 
 struct ContentView: View {
+    let myDrinks: Drink = .soft(color: .black)
     
     var body: some View {
         VStack{
-            Text(returnName())
-            Text(returnName2())
+            Text(myDrinks.name)
         }
     }
-    
-    func returnName2() -> String {
-        return "sasha"
-    } //method
-    
 }
 
 struct ContentView_Previews: PreviewProvider {

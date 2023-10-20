@@ -9,21 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var isShowingModal: Bool = false
+    @State var isShowingScreen: Bool = false
     
     var body: some View {
         VStack{
             Button {
-                isShowingModal = true
+                isShowingScreen = true
             }label: {
-                Text("Call modal")
+                Text("Call full screen")
             }
-            .sheet(isPresented: $isShowingModal, content: {
+            .fullScreenCover(isPresented: $isShowingScreen) {
                 ZStack{
                     Color.orange.ignoresSafeArea()
-                    Text("Modal View")
+                    VStack{
+                        Text("Full screen")
+                        Button {
+                            isShowingScreen = false
+                        }label: {
+                            Text("Back")
+                        }
+                    }
                 }
-            })
+            }
         }
     }
 }

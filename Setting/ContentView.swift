@@ -8,25 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var isShowingModal: Bool = false
+    
     var body: some View {
         VStack{
-            Image(systemName: "heart.fill")
-            Divider()
-                .background(.red)
-                .frame(height: 30)
-            Text("World")
-            HStack{
-                Image(systemName: "heart.fill")
-                Divider()
-                    .background(.red)
-                    .frame(width: 30)
-                Text("World")
+            Button {
+                isShowingModal = true
+            }label: {
+                Text("Call modal")
             }
-            Image(systemName: "heart.fill")
-            Divider()
-                .background(.red)
-                .frame(height: 30)
-            Text("World")
+            .sheet(isPresented: $isShowingModal, content: {
+                ZStack{
+                    Color.orange.ignoresSafeArea()
+                    Text("Modal View")
+                }
+            })
         }
     }
 }

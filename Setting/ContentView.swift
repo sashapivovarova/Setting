@@ -8,21 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var inHome: Bool = true
+    @State var userName: String = ""
     
     var body: some View {
-        VStack{
-            Toggle(isOn: $inHome) {
-                if inHome {
-                    Text("I'm home.")
-                } else {
-                    Text("I'm out.")
-                }
-            }
-            .padding()
-            .toggleStyle(.switch)
-            .tint(.black)
+        VStack(alignment: .leading) {
+            Text("userID : \(userName)")
+            TextField("Enter your ID", text: $userName)
+                .textFieldStyle(.roundedBorder)
         }
+        .padding()
     }
 }
 

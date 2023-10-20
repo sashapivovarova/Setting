@@ -8,28 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @State var isShowingScreen: Bool = false
+    @State var isShowingAlert: Bool = false
     
     var body: some View {
         VStack{
             Button {
-                isShowingScreen = true
+                isShowingAlert = true
             }label: {
-                Text("Call full screen")
+                Text("Show me the alert")
             }
-            .fullScreenCover(isPresented: $isShowingScreen) {
-                ZStack{
-                    Color.orange.ignoresSafeArea()
-                    VStack{
-                        Text("Full screen")
-                        Button {
-                            isShowingScreen = false
-                        }label: {
-                            Text("Back")
-                        }
-                    }
-                }
+            .alert(isPresented: $isShowingAlert) {
+                Alert(title: Text("Something is wrong!"),
+                      primaryButton: .default(Text("OK")),
+                      secondaryButton: .cancel())
             }
         }
     }

@@ -8,58 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var id: String = ""
-    @State var password: String = ""
-    @State var checking: Bool = false
-    @State var success: Bool = false
-    @State var fail: Bool = false
+    @State var progress: Double = 0.5
     
     var body: some View {
         VStack {
-            TextField("Enter ID", text: $id)
-                .textFieldStyle(.roundedBorder)
-            HStack{
-                if checking {
-                    TextField("Enter Password", text: $password)
-                        .textFieldStyle(.roundedBorder)
+            ProgressView(value: progress)
+            Button("More") {
+                if progress > 1 {
+                    progress = 0
                 } else {
-                    SecureField("Enter Password", text: $password)
-                        .textFieldStyle(.roundedBorder)
-                }
-                Button {
-                    checking.toggle()
-                }label: {
-                    Image(systemName: "eye")
+                    progress += 0.05
                 }
             }
-            Button {
-                if password == "1234" {
-                    success = true
-                } else {
-                    fail = true
-                }
-            } label: {
-                Text("Log in")
-            }
-            .fullScreenCover(isPresented: $success) {
-                ZStack{
-                    Color.orange.ignoresSafeArea()
-                    VStack{
-                        Text("Welcome, \(id)")
-                        Button {
-                            success = false
-                            fail = true
-                        }label: {
-                            Text("Log out")
-                        }
-                    }
-                }
-            }
-            .alert(isPresented: $fail) {
-                Alert(title: Text("Password is wrong!"))
-            }
-            .padding()
+            Text(progress.description)
         }
+        .padding()
     }
 }
 

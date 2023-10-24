@@ -18,22 +18,7 @@ struct ContentView: View {
                     NavigationLink {
                         Text("detail")
                     } label: {
-                        HStack{
-                            Image("eunsol")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 60, height: 60)
-                                .padding(.all,5)
-                                .background(.gray)
-                                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text("Anastasia Grey")
-                                    .font(.system(size: 24, weight: .regular))
-                                Text("Apple ID, iColud, 미디어 및 구입")
-                                    .font(.system(size: 14))
-                            }
-                            .padding(.leading, 5)
-                        }
+                        profileCell()
                     }
                 }
                 
@@ -47,7 +32,7 @@ struct ContentView: View {
                             .background(.orange)
                             .foregroundColor(.white)
                             .cornerRadius(6)
-                        Toggle("airplane", isOn: $airplane)
+                        Toggle("에어플레인 모드", isOn: $airplane)
                     }
                     HStack{
                         Image(systemName: "wifi")
@@ -90,90 +75,63 @@ struct ContentView: View {
                             }
                         }
                     }
-                    HStack{
-                        Image(systemName: "antenna.radiowaves.left.and.right")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 4)
-                            .background(.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(6)
-                        NavigationLink("셀룰러") {
-                            Text("detail")
-                        }
-                    }
-                    HStack{
-                        Image(systemName: "")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 4)
-                            .background(.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(6)
-                        NavigationLink("개인용 핫스팟") {
-                            Text("detail")
-                        }
-                    }
+                    settingsCell(systemName: "antenna.radiowaves.left.and.right", linkTitle: "셀룰러", bColor: .green) {Text("Detail")}
+                    settingsCell(systemName: "safari", linkTitle: "개인용 핫스팟", bColor: .green) {Text("Detail")}
                 }
                 
                 Section {
-                    HStack{
-                        Image(systemName: "")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 4)
-                            .background(.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(6)
-                        NavigationLink("알림") {
-                            Text("detail")
-                        }
-                    }
-                    HStack{
-                        Image(systemName: "sound")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 4)
-                            .background(.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(6)
-                        NavigationLink("손쉬운 사용") {
-                            Text("detail")
-                        }
-                    }
-                    HStack{
-                        Image(systemName: "moon.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 4)
-                            .background(.indigo)
-                            .foregroundColor(.white)
-                            .cornerRadius(6)
-                        NavigationLink("집중 모드") {
-                            Text("detail")
-                        }
-                    }
-                    HStack{
-                        Image(systemName: "hourglass")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 4)
-                            .background(.indigo)
-                            .foregroundColor(.white)
-                            .cornerRadius(6)
-                        NavigationLink("스크린 타임") {
-                            Text("detail")
-                        }
-                    }
+                    settingsCell(systemName: "bell.fill", linkTitle: "알림", bColor: .red) {Text("Detail")}
+                    settingsCell(systemName: "bell.fill", linkTitle: "사운드 및 햅틱", bColor: .red) {Text("Detail")}
+                    settingsCell(systemName: "moon.fill", linkTitle: "집중 모드", bColor: .indigo) {Text("Detail")}
+                    settingsCell(systemName: "hourglass", linkTitle: "스크린 타임", bColor: .indigo) {Text("Detail")}
+                }
+                
+                Section {
+                    settingsCell(systemName: "gear", linkTitle: "일반", bColor: .gray) {Text("Detail")}
+                    settingsCell(systemName: "control", linkTitle: "제어 센터", bColor: .gray) {Text("Detail")}
+                    settingsCell(systemName: "display", linkTitle: "디스플레이 및 밝기", bColor: .blue) {Text("Detail")}
+                    settingsCell(systemName: "house", linkTitle: "홈 화면 및 앱 보관함", bColor: .indigo) {Text("Detail")}
                 }
             }
             .navigationTitle(Text("설정"))
+        }
+    }
+    
+    @ViewBuilder
+    private func profileCell() -> some View {
+        HStack{
+            Image("eunsol")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 60, height: 60)
+                .padding(.all,5)
+                .background(.gray)
+                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+            VStack(alignment: .leading, spacing: 3) {
+                Text("Anastasia Grey")
+                    .font(.system(size: 24, weight: .regular))
+                Text("Apple ID, iColud, 미디어 및 구입")
+                    .font(.system(size: 14))
+            }
+            .padding(.leading, 5)
+        }
+    }
+    
+    @ViewBuilder
+    private func settingsCell<V: View>(systemName: String, linkTitle: String, bColor: Color, destination: @escaping () -> V) -> some View {
+        
+        HStack{
+            Image(systemName: systemName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20, height: 20)
+                .padding(.all, 4)
+                .background(bColor)
+                .foregroundColor(.white)
+                .cornerRadius(6)
+            NavigationLink(linkTitle) {
+                destination()
+            }
         }
     }
 }

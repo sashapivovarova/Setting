@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var isViewing: Bool = false
+    
     var body: some View {
-        NavigationStack {
-            NavigationLink(value: 3) {
-                Text("test 3")
-            }.navigationDestination(for: Int.self) { value in
-                Text("Sasha tried \(value) times")
-            }.navigationTitle("Hello")
-        }
+        VStack{
+            Text("Sasha")
+                .sheet(isPresented: $isViewing) {
+                Text("Modal")
+                        .onAppear {
+                            print("on Appear")
+                        }
+                        .onDisappear {
+                            print("on Disaapear")
+                        }
+                }
+            Button {
+                isViewing.toggle()
+            } label: {
+                Text("Click")
+            }
+        }  
     }
 }
 

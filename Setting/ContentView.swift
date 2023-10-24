@@ -9,10 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var userID: String = ""
-    @State var userPW: String = ""
-    @State var hasLoggedIn: Bool = false
-    @State var isOn: Bool = false
+    @State var airplane: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -42,6 +39,126 @@ struct ContentView: View {
                 
                 Section {
                     HStack{
+                        Image(systemName: "airplane")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .padding(.all, 4)
+                            .background(.orange)
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                        Toggle("airplane", isOn: $airplane)
+                    }
+                    HStack{
+                        Image(systemName: "wifi")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .padding(.all, 4)
+                            .background(.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                        NavigationLink {
+                            Text("detail")
+                        } label: {
+                            HStack{
+                                Text("Wi-Fi")
+                                Spacer()
+                                Text("Concentrate&Coffee break")
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                    HStack{
+                        Image(systemName: "bolt")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .padding(.all, 4)
+                            .background(.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                        NavigationLink {
+                            Text("detail")
+                        } label: {
+                            HStack{
+                                Text("Bluetooth")
+                                Spacer()
+                                Text("켬")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                    HStack{
+                        Image(systemName: "antenna.radiowaves.left.and.right")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .padding(.all, 4)
+                            .background(.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                        NavigationLink("셀룰러") {
+                            Text("detail")
+                        }
+                    }
+                    HStack{
+                        Image(systemName: "")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .padding(.all, 4)
+                            .background(.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                        NavigationLink("개인용 핫스팟") {
+                            Text("detail")
+                        }
+                    }
+                }
+                
+                Section {
+                    HStack{
+                        Image(systemName: "")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .padding(.all, 4)
+                            .background(.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                        NavigationLink("알림") {
+                            Text("detail")
+                        }
+                    }
+                    HStack{
+                        Image(systemName: "sound")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .padding(.all, 4)
+                            .background(.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                        NavigationLink("손쉬운 사용") {
+                            Text("detail")
+                        }
+                    }
+                    HStack{
+                        Image(systemName: "moon.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .padding(.all, 4)
+                            .background(.indigo)
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                        NavigationLink("집중 모드") {
+                            Text("detail")
+                        }
+                    }
+                    HStack{
                         Image(systemName: "hourglass")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -51,48 +168,6 @@ struct ContentView: View {
                             .foregroundColor(.white)
                             .cornerRadius(6)
                         NavigationLink("스크린 타임") {
-                            Text("detail")
-                        }
-                    }
-                }
-                
-                Section {
-                    HStack{
-                        Image(systemName: "gear")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 4)
-                            .background(.gray)
-                            .foregroundColor(.white)
-                            .cornerRadius(6)
-                        NavigationLink("일반") {
-                            Text("detail")
-                        }
-                    }
-                    HStack{
-                        Image(systemName: "accessibility")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 4)
-                            .background(.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(6)
-                        NavigationLink("손쉬운 사용") {
-                            Text("detail")
-                        }
-                    }
-                    HStack{
-                        Image(systemName: "heart")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 4)
-                            .background(.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(6)
-                        NavigationLink("개인 정보 보호") {
                             Text("detail")
                         }
                     }

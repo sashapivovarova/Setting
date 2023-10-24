@@ -18,7 +18,22 @@ struct ContentView: View {
                     NavigationLink {
                         Text("detail")
                     } label: {
-                        profileCell()
+                        HStack{
+                            Image("eunsol")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 60, height: 60)
+                                .padding(.all,5)
+                                .background(.gray)
+                                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text("Anastasia Grey")
+                                    .font(.system(size: 24, weight: .regular))
+                                Text("Apple ID, iColud, 미디어 및 구입")
+                                    .font(.system(size: 14))
+                            }
+                            .padding(.leading, 5)
+                        }
                     }
                 }
                 
@@ -34,63 +49,24 @@ struct ContentView: View {
                             .cornerRadius(6)
                         Toggle("에어플레인 모드", isOn: $airplane)
                     }
-                    HStack{
-                        Image(systemName: "wifi")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 4)
-                            .background(.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(6)
-                        NavigationLink {
-                            Text("detail")
-                        } label: {
-                            HStack{
-                                Text("Wi-Fi")
-                                Spacer()
-                                Text("Concentrate&Coffee break")
-                                    .font(.system(size: 15))
-                                    .foregroundColor(.gray)
-                            }
-                        }
-                    }
-                    HStack{
-                        Image(systemName: "bolt")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.all, 4)
-                            .background(.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(6)
-                        NavigationLink {
-                            Text("detail")
-                        } label: {
-                            HStack{
-                                Text("Bluetooth")
-                                Spacer()
-                                Text("켬")
-                                    .foregroundColor(.gray)
-                            }
-                        }
-                    }
-                    settingsCell(systemName: "antenna.radiowaves.left.and.right", linkTitle: "셀룰러", bColor: .green) {Text("Detail")}
-                    settingsCell(systemName: "safari", linkTitle: "개인용 핫스팟", bColor: .green) {Text("Detail")}
+                    navigationLinkCell(systemName: "wifi", linkTitle: "Wi-Fi", bColor: .blue, subtitle: "Concentrate&Coffee break") {Text("Detail")}
+                    navigationLinkCell(systemName: "bolt", linkTitle: "Bluetooth", bColor: .blue, subtitle: "켬") {Text("Detail")}
+                    navigationLinkCell(systemName: "antenna.radiowaves.left.and.right", linkTitle: "셀룰러", bColor: .green) {Text("Detail")}
+                    navigationLinkCell(systemName: "safari", linkTitle: "개인용 핫스팟", bColor: .green) {Text("Detail")}
                 }
                 
                 Section {
-                    settingsCell(systemName: "bell.fill", linkTitle: "알림", bColor: .red) {Text("Detail")}
-                    settingsCell(systemName: "bell.fill", linkTitle: "사운드 및 햅틱", bColor: .red) {Text("Detail")}
-                    settingsCell(systemName: "moon.fill", linkTitle: "집중 모드", bColor: .indigo) {Text("Detail")}
-                    settingsCell(systemName: "hourglass", linkTitle: "스크린 타임", bColor: .indigo) {Text("Detail")}
+                    navigationLinkCell(systemName: "bell.fill", linkTitle: "알림", bColor: .red) {Text("Detail")}
+                    navigationLinkCell(systemName: "bell.fill", linkTitle: "사운드 및 햅틱", bColor: .red) {Text("Detail")}
+                    navigationLinkCell(systemName: "moon.fill", linkTitle: "집중 모드", bColor: .indigo) {Text("Detail")}
+                    navigationLinkCell(systemName: "hourglass", linkTitle: "스크린 타임", bColor: .indigo) {Text("Detail")}
                 }
                 
                 Section {
-                    settingsCell(systemName: "gear", linkTitle: "일반", bColor: .gray) {Text("Detail")}
-                    settingsCell(systemName: "control", linkTitle: "제어 센터", bColor: .gray) {Text("Detail")}
-                    settingsCell(systemName: "display", linkTitle: "디스플레이 및 밝기", bColor: .blue) {Text("Detail")}
-                    settingsCell(systemName: "house", linkTitle: "홈 화면 및 앱 보관함", bColor: .indigo) {Text("Detail")}
+                    navigationLinkCell(systemName: "gear", linkTitle: "일반", bColor: .gray) {Text("Detail")}
+                    navigationLinkCell(systemName: "control", linkTitle: "제어 센터", bColor: .gray) {Text("Detail")}
+                    navigationLinkCell(systemName: "display", linkTitle: "디스플레이 및 밝기", bColor: .blue) {Text("Detail")}
+                    navigationLinkCell(systemName: "house", linkTitle: "홈 화면 및 앱 보관함", bColor: .indigo) {Text("Detail")}
                 }
             }
             .navigationTitle(Text("설정"))
@@ -98,27 +74,7 @@ struct ContentView: View {
     }
     
     @ViewBuilder
-    private func profileCell() -> some View {
-        HStack{
-            Image("eunsol")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 60, height: 60)
-                .padding(.all,5)
-                .background(.gray)
-                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-            VStack(alignment: .leading, spacing: 3) {
-                Text("Anastasia Grey")
-                    .font(.system(size: 24, weight: .regular))
-                Text("Apple ID, iColud, 미디어 및 구입")
-                    .font(.system(size: 14))
-            }
-            .padding(.leading, 5)
-        }
-    }
-    
-    @ViewBuilder
-    private func settingsCell<V: View>(systemName: String, linkTitle: String, bColor: Color, destination: @escaping () -> V) -> some View {
+    private func navigationLinkCell<V: View>(systemName: String, linkTitle: String, bColor: Color,subtitle: String? = nil, destination: @escaping () -> V) -> some View {
         
         HStack{
             Image(systemName: systemName)
@@ -129,8 +85,23 @@ struct ContentView: View {
                 .background(bColor)
                 .foregroundColor(.white)
                 .cornerRadius(6)
-            NavigationLink(linkTitle) {
-                destination()
+            
+            if let subtitle = subtitle {
+                NavigationLink {
+                    Text("detail")
+                } label: {
+                    HStack{
+                        Text(linkTitle)
+                        Spacer()
+                        Text(subtitle)
+                            .font(.system(size: 15))
+                            .foregroundColor(.gray)
+                    }
+                }
+            } else {
+                NavigationLink(linkTitle) {
+                    destination()
+                }
             }
         }
     }

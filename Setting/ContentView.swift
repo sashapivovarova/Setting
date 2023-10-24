@@ -18,14 +18,26 @@ struct ContentView: View {
         NavigationStack {
             List {
                 Section {
-                    HStack{
-                        Image(systemName: "circle.fill")
-                        VStack(alignment: .leading) {
-                            Text("sasha")
-                            Text("Apple ID, iColud, 미디어 및 구입")
+                    NavigationLink {
+                        Text("detail")
+                    } label: {
+                        HStack{
+                            Image("eunsol")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 60, height: 60)
+                                .padding(.all,5)
+                                .background(.gray)
+                                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text("Anastasia Grey")
+                                    .font(.system(size: 24, weight: .regular))
+                                Text("Apple ID, iColud, 미디어 및 구입")
+                                    .font(.system(size: 14))
+                            }
+                            .padding(.leading, 5)
                         }
                     }
-
                 }
                 
                 Section {

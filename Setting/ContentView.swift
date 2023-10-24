@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            HStack{
-                Image(systemName: "heart.fill")
-                Text("Label")
+        NavigationView {
+            NavigationLink(destination: Text("My View 1")) {
+                ZStack{
+                    Color.pink
+                    Text("test")
+                }
             }
-            Label(/*@START_MENU_TOKEN@*/"Label"/*@END_MENU_TOKEN@*/, systemImage: "heart.fill")
-            
+            .navigationTitle("Hello")
         }
     }
 }

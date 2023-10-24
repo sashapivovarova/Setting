@@ -9,14 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            NavigationLink(destination: Text("My View 1")) {
-                ZStack{
-                    Color.pink
-                    Text("test")
-                }
-            }
-            .navigationTitle("Hello")
+        NavigationStack {
+            NavigationLink(value: 3) {
+                Text("test 3")
+            }.navigationDestination(for: Int.self) { value in
+                Text("Sasha tried \(value) times")
+            }.navigationTitle("Hello")
         }
     }
 }
